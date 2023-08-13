@@ -3,7 +3,8 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.text import slugify
-# from rules.numbers_validators import PHONE_NUMBER_PATTERN
+from rules.numbers_validators import PHONE_NUMBER_PATTERN
+from rules.file_uploader import image_uploader
 
 
 # Create your models here.
@@ -13,9 +14,10 @@ class Profile(models.Model):
     id = models.AutoField(primary_key=True, null=False, blank=False)
     user_id = models.OneToOneField(User, on_delete=models.CASCADE)
     country = models.CharField(max_length=20, blank=False, null=False)
+    image = models.ImageField(upload_to=image_uploader('Profile'), null=True, blank=False)
     phone = models.CharField(
         max_length=11, blank=False, null=False,
-        # validators=[PHONE_NUMBER_PATTERN,]
+        validators=[PHONE_NUMBER_PATTERN]
     )
     date_of_birth = models.DateField(blank=True, null=True)
     slug = models.SlugField(null=True, blank=True)

@@ -7,7 +7,7 @@
 
   <!-- Basic Page Needs -->
   <meta charset="utf-8">
-  <title>{{app_name}}</title>
+  <title>{{page_title}}</title>
 
   <!-- Mobile Specific Metas -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -52,7 +52,7 @@
 			<div class="col-md-4 col-xs-12 col-sm-4">
 				<!-- Site Logo -->
 				<div class="logo text-center">
-					<a href="{% url 'products:home-page' %}">
+					<a href="{% url 'product:home-page' %}">
 						<!-- replace logo here -->
 						<svg width="135px" height="29px" viewBox="0 0 155 29" version="1.1" xmlns="http://www.w3.org/2000/svg"
 							xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -154,7 +154,7 @@
 
 					<!-- Home -->
 					<li class="dropdown ">
-						<a href="{% url 'products:home-page' %}">Home</a>
+						<a href="{% url 'product:home-page' %}">Home</a>
 					</li><!-- / Home -->
 
 
@@ -171,7 +171,7 @@
 									<ul>
 										<li class="dropdown-header">Pages</li>
 										<li role="separator" class="divider"></li>
-										<li><a href="{% url 'products:shop' %}">Shop</a></li>
+										<li><a href="{% url 'product:shop' %}">Shop</a></li>
 										<li><a href="checkout.html">Checkout</a></li>
 										<li><a href="cart.html">Cart</a></li>
 										<li><a href="pricing.html">Pricing</a></li>
@@ -181,15 +181,15 @@
 								</div>
 
 								<!-- Layout -->
-								<div class="col-lg-6 col-md-6 mb-sm-3">
-									<ul>
-										<li class="dropdown-header">Layout</li>
-										<li role="separator" class="divider"></li>
-										<li><a href="product-single.html">Product Details</a></li>
-										<li><a href="shop-sidebar.html">Shop With Sidebar</a></li>
+<!--								<div class="col-lg-6 col-md-6 mb-sm-3">-->
+<!--									<ul>-->
+<!--										<li class="dropdown-header">Layout</li>-->
+<!--										<li role="separator" class="divider"></li>-->
+<!--										<li><a href="product-single.html">Product Details</a></li>-->
+<!--										<li><a href="shop-sidebar.html">Shop With Sidebar</a></li>-->
 
-									</ul>
-								</div>
+<!--									</ul>-->
+<!--								</div>-->
 
 							</div><!-- / .row -->
 						</div><!-- / .dropdown-menu -->
@@ -242,7 +242,7 @@
 
 								<!-- Mega Menu -->
 								<div class="col-sm-3 col-xs-12">
-									<a href="{% url 'products:shop' %}shop.html">
+									<a href="{% url 'product:shop' %}shop.html">
 										<img class="img-responsive" src="images/shop/header-img.jpg" alt="menu image" />
 									</a>
 								</div>
