@@ -39,9 +39,9 @@ def update_profile(request, *args, **kwargs):
         if form.is_valid():
             form.save()
             return redirect(reverse('accounts:profile-details'))
-    form = UpdateProfileForm
+    form = UpdateProfileForm(instance=queryset)
     context = {
-        'from': form,
+        'form': form,
         'page_title': 'Aviato | Update profile',
     }
     return render(request, 'update-profile.html', context)
