@@ -12,7 +12,7 @@ from rules.file_uploader import image_uploader
 
 class Profile(models.Model):
     id = models.AutoField(primary_key=True, null=False, blank=False)
-    user_id = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     country = models.CharField(max_length=20, blank=False, null=False)
     image = models.ImageField(upload_to=image_uploader('Profile'), null=True, blank=False)
     phone = models.CharField(
@@ -26,24 +26,24 @@ class Profile(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = ''
-        text = f'{self.user_id} {self.user_id.id}'
+        text = f'{self.user} {self.user.id}'
         self.slug = slugify(text)
         super(Profile, self).save(*args, **kwargs)
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
         if created:
-            Profile.objects.create(user_id=instance)
+            Profile.objects.create(user=instance)
 
     def __str__(self):
-        return f"id={self.id}, user = {self.user_id.username}"
+        return f"id={self.id}, user = {self.user.username}"
 
 
 class Address(models.Model):
     id = models.AutoField(primary_key=True, null=False, blank=False)
-    user_id = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     company = models.CharField(max_length=20, null=False, blank=False)
     address = models.CharField(max_length=50,null=False, blank=False)
 
     def __str__(self):
-        return f"id={self.id}, address={self.address}, user = {self.user_id.username}, company = {self.company}"
+        return f"id={self.id}, address={self.address}, user = {self.user.username}, company = {self.company}"

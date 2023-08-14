@@ -22,11 +22,9 @@ def signup_view(request):
 # define get function that get user profile details
 @login_required
 def profile_details(request, *args, **kwargs):
-    queryset = Profile.objects.get(user_id=request.user)
-    address = Address.objects.filter(user_id=request.user)
+    queryset = Profile.objects.get(user=request.user)
     context = {
         'profile': queryset,
-        'address': address,
         'page_title': f"Aviato | Profile"
     }
     return render(request, 'profile-details.html', context)
