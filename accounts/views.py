@@ -1,9 +1,22 @@
 from django.shortcuts import render, redirect, reverse
 from .models import Profile, Address
 from django.contrib.auth.decorators import login_required
-from .forms import UpdateProfileForm
+from .forms import UpdateProfileForm, SignUpForm
 # TODO: don't forget the page_title attribute
-# TODO: edit base.html app_name ---> page_title, add product urls
+
+
+def signup_view(request):
+    form = SignUpForm(request.POST)
+    if form.is_valid():
+        form.save()
+        return redirect(reverse('login'))
+    else:
+        form = SignUpForm()
+    context = {
+        'form': form,
+        'page_title': 'SignUp',
+    }
+    return render(request, 'registration/signup.html', context=context)
 
 
 # define get function that get user profile details

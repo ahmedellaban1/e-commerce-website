@@ -7,7 +7,7 @@
 
   <!-- Basic Page Needs -->
   <meta charset="utf-8">
-  <title>{{app_name}}</title>
+  <title>{{page_title}}</title>
 
   <!-- Mobile Specific Metas -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -45,11 +45,11 @@
   <div class="row">
       <div class="col-md-6 col-md-offset-3">
       <div class="block text-center">
-          <a class="logo" href="{% url 'products:home-page' %}">
+          <a class="logo" href="{% url 'product:home-page' %}">
           <img src="{% static 'images/logo.png' %}" alt="">
           </a>
 
-{% block container %}
+{% block content %}
 
 {% endblock%}
 
