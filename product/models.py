@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from accounts.models import Profile
 from django.utils.text import slugify
 from rules.choices_tuples import SIZE_TUPLE
 from rules.file_uploader import image_uploader
@@ -28,9 +28,6 @@ class Product(models.Model):
     color = models.CharField(max_length=23, null=False, blank=False,
                              validators=[COLOR_HEXA_VALIDATOR, ]
                              )
-    size = models.CharField(max_length=3,
-                            choices=SIZE_TUPLE, default=SIZE_TUPLE[0][0]
-                            )
     slug = models.SlugField(null=True, blank=True)
     category_id = models.ForeignKey('Category', null=False, blank=False, on_delete=models.DO_NOTHING)
     created_at = models.DateTimeField(auto_now=True, null=True, blank=True )
@@ -58,12 +55,12 @@ class ProductImage(models.Model):
 class Review(models.Model):
     id = models.AutoField(primary_key=True, null=False, blank=False)
     product_id = models.ForeignKey(Product, null=False, blank=False, on_delete=models.CASCADE)
-    user_id = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
-    date_time = models.DateTimeField(auto_created=True, null=False, blank=False)
+    user_id = models.ForeignKey(Profile, null=False, blank=False, on_delete=models.CASCADE)
+    date_time = models.DateTimeField(auto_now=True, null=False, blank=False)
     review = models.TextField(max_length=200, null=False, blank=False,
                               validators=[REVIEW_PATTERN, ]
                               )
 
     def __str__(self):
         return_review = f'id = {self.id}, product_id = {self.product_id.id}, '
-        return return_review + f' user = {self.user_id.username}, review = {self.review[:20]}...'
+        return return_review + f' user = {self.user_id.user.username}, review = {self.review[:20]}...'

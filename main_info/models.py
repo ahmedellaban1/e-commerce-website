@@ -1,12 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 from product.models import Product
-# from rules.choices_tuples import (
-#     STATUS_TUPLE,
-# )
-# from rules.numbers_validators import (
-#     ZIP_CODE_VALIDATOR,
-# )
+from rules.choices_tuples import (
+    STATUS_TUPLE,SIZE_TUPLE
+)
+from rules.numbers_validators import (
+    ZIP_CODE_VALIDATOR,
+)
 
 
 # Create your models here.
@@ -15,12 +15,15 @@ class Order(models.Model):
     id = models.AutoField(primary_key=True, null=False, blank=False)
     user_id = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
     product_id = models.ForeignKey(Product, null=False, blank=False, on_delete=models.CASCADE)
+    size = models.CharField(max_length=3,
+                            choices=SIZE_TUPLE, default=SIZE_TUPLE[0][0]
+                            )
     date = models.DateField(auto_created=True, null=False, blank=False)
     repetition = models.IntegerField(null=False, blank=False)
     total_price = models.DecimalField(decimal_places=2, max_digits=7, null=False, blank=False)
     status = models.CharField(max_length=15,
-                              # choices=STATUS_TUPLE,
-                              # default=STATUS_TUPLE[0][0]
+                              choices=STATUS_TUPLE,
+                              default=STATUS_TUPLE[0][0]
                               )
 
     def __str__(self):
