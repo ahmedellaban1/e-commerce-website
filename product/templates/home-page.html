@@ -90,12 +90,12 @@
               </div>
           </div>
           <div class="row">
-            {% for i in products %}
+            {% for product in products %}
               <div class="col-md-4">
                   <div class="product-item">
                       <div class="product-thumb">
                           <span class="bage">Sale</span>
-                          <img class="img-responsive" src="{{i.image.url}}" />
+                          <img class="img-responsive" src="{{product.image.url}}" />
                           <div class="preview-meta">
                               <ul>
                                   <li>
@@ -113,8 +113,8 @@
                             </div>
                       </div>
                       <div class="product-content">
-                          <h4><a href="product-single.html">{{ i.title }}</a></h4>
-                          <p class="price">${{i.price}}</p>
+                          <h4><a href="{% url 'product:product_details' id=product.id slug=product.slug %}">{{ product.title }}</a></h4>
+                          <p class="price">${{product.price}}</p>
                       </div>
                   </div>
               </div>
